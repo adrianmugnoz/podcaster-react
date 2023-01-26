@@ -6,7 +6,16 @@ Application for exploring most popular podcasts from iTunes. It consists on thre
 - Podcast: Displays a particular podcast information and its episodes list.
 - Episode: Displays a particular episode information and a player for listen it.
 
-## Usage
+## Environment
+
+The application has been developed in the following environment:
+
+- Node v14.18.0
+- Npm 6.14.15
+
+It should also work in newer versions.
+
+## Development
 
 ```bash
 # Npm
@@ -16,6 +25,29 @@ npm start
 ```
 
 A new browser will be opened automatically at `http://localhost:3000`.
+
+## Production
+
+For generating a production build at `dist` folder, the following command can be executed:
+
+```bash
+# Npm
+npm run build
+```
+
+It will perform some optimization techniques such us js minimization using the default TerserPlugin webpack configuration and also css minimization.
+
+## Linting and Format
+
+The project has configured `ESLint` and `Prettier` for linting and formatting respectively. There are two npm scripts for executing them:
+
+```bash
+# Npm
+npm run lint
+npm run format
+```
+
+By default, they are executed on the pre-commit hook via `husky`.
 
 ## Tech Stack
 - [Webpack](https://webpack.js.org/)
