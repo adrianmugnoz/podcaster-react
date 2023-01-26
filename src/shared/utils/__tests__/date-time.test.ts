@@ -1,6 +1,6 @@
-import { convertMillisecondsToHoursMinutesSeconds, formatDate } from '../dateTime.utils';
+import { convertMillisecondsToHoursMinutesSeconds, formatDate } from '../date-time.utils';
 
-describe('dateTime utils', () => {
+describe('date-time utils', () => {
   test('convert milliseconds to hours:minutes:seconds', () => {
     const timesMillis = [1000, 60000, 3600000];
     const expected = ['01', '01:00', '01:00:00'];

@@ -3,9 +3,15 @@ import { TPodcast, TEpisodeResponse, TEntryResponse } from './models';
 
 const API_BASE = 'https://itunes.apple.com';
 
+const generateCorsApiUrl = (endpoint: string): string => {
+  return `https://api.allorigins.win/get?url=${encodeURIComponent(`${API_BASE}${endpoint}`)}`;
+};
+
 const fetchPodcastList = async (): Promise<TPodcast[]> => {
-  const { data } = await axios.get(`${API_BASE}/us/rss/toppodcasts/limit=100/genre=1310/json`);
-  const entries = data.feed.entry;
+  const url = generateCorsApiUrl('/us/rss/toppodcasts/limit=100/genre=1310/json');
+  const { data } = await axios.get(url);
+  const parsedJson = JSON.parse(data?.contents);
+  const entries = parsedJson.feed.entry;
   const preparedData = entries.map((entry: TEntryResponse) => {
     return {
       name: entry['im:name'].label,
@@ -24,12 +30,8 @@ const fetchPodcastList = async (): Promise<TPodcast[]> => {
 };
 
 const fetchPodcastDetail = async (signal: AbortSignal, podcastId: string): Promise<TPodcast> => {
-  const { data } = await axios.get(
-    `https://api.allorigins.win/get?url=${encodeURIComponent(
-      `${API_BASE}/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode`,
-    )}`,
-    { signal },
-  );
+  const url = generateCorsApiUrl(`/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode`);
+  const { data } = await axios.get(url, { signal });
   const parsedJson: TEpisodeResponse[] = JSON.parse(data?.contents).results;
   const podcastJson = parsedJson.find((item) => item.kind === 'podcast');
   const podcastEpisodes = parsedJson.filter((item) => item.kind === 'podcast-episode');

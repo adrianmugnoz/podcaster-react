@@ -1,1 +1,1 @@
-export * from './dateTime.utils';
+export * from './date-time.utils';

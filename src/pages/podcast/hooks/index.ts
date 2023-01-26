@@ -1,2 +1,2 @@
-export * from './usePodcastDetail';
-export * from './useOutletPodcast';
+export * from './use-podcast-detail.hook';
+export * from './use-outlet-podcast.hook';

@@ -18,7 +18,15 @@ module.exports = {
     '\\.css\\.ts$': '@vanilla-extract/jest-transform',
   },
   resetMocks: true,
-  collectCoverageFrom: ['src/**/*.tsx', '!<rootDir>/node_modules/**/*', '!<rootDir>/src/test/**/*'],
+  collectCoverageFrom: [
+    'src/**/*.ts?(x)',
+    '!<rootDir>/node_modules/**/*',
+    '!<rootDir>/src/test/**/*',
+    '!<rootDir>/src/**/index.ts',
+    '!<rootDir>/src/**/*.css.ts',
+    '!<rootDir>/src/setupTests*',
+    '!<rootDir>/src/index*',
+  ],
   preset: 'ts-jest',
   collectCoverage: true,
 };
