@@ -1,23 +1,15 @@
 import React from 'react';
 import { Link } from 'core/components/link';
-import { useQuery } from '@tanstack/react-query';
 import debounce from 'lodash.debounce';
-import { fetchPodcastList, TPodcast } from 'core/services/podcast';
+import { usePodcastList, TPodcast } from 'core/services/podcast';
 import { Badge, Grid, GridItem, Input } from 'shared/components';
 import { HomeCard } from './components';
 import { ROUTES } from 'core/router';
 import { styles } from './home.css';
 import { HomeSkeleton } from './home.skeleton';
 
-function usePodcasts() {
-  return useQuery({
-    queryKey: ['podcastList'],
-    queryFn: fetchPodcastList,
-  });
-}
-
 function Home() {
-  const { status, data } = usePodcasts();
+  const { status, data } = usePodcastList();
   const [filteredPodcasts, setFilteredPodcasts] = React.useState<TPodcast[]>([]);
 
   React.useEffect(() => {

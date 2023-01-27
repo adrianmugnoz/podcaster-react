@@ -2,8 +2,7 @@ import React from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { usePodcastDetail } from './hooks';
-import { fetchPodcastList, TPodcast } from 'core/services/podcast';
+import { usePodcastDetail, fetchPodcastList, TPodcast, QUERIES } from 'core/services/podcast';
 import { Grid, GridItem } from 'shared/components';
 import { PodcastDetailCard } from './components';
 import { PodcastSkeleton } from './podcast.skeleton';
@@ -16,8 +15,8 @@ function Podcast() {
 
   React.useEffect(() => {
     const fetchPodcast = async () => {
-      const podcasts: TPodcast[] = await queryClient.ensureQueryData({
-        queryKey: ['podcastList'],
+      const podcasts = await queryClient.ensureQueryData({
+        queryKey: [QUERIES.PODCAST_LIST],
         queryFn: fetchPodcastList,
       });
       const currentPodcast = podcasts.find((podcast) => podcast.id === podcastId);
