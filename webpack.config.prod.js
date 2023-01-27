@@ -14,5 +14,15 @@ module.exports = merge(commonWebpackConfig, {
   optimization: {
     minimize: true,
     minimizer: ['...', new CssMinimizerPlugin()],
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   },
 });

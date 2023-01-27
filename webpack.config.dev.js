@@ -4,7 +4,7 @@ const commonWebpackConfig = require('./webpack.config.common');
 
 module.exports = merge(commonWebpackConfig, {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
